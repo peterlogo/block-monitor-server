@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A backend service for monitoring blockchain transactions.",
   "main": "dist/index.js",
-  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
     "format": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
