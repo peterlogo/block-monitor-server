@@ -1,8 +1,12 @@
 import Fastify from 'fastify';
 import { config } from './config';
+import { pinoLogLevel, pinoTransport } from './services';
 
 const server = Fastify({
-  logger: true
+  logger: {
+    level: pinoLogLevel,
+    stream: pinoTransport
+  }
 });
 
 server.get('/', async (_, reply) => {
