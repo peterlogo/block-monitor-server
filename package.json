@@ -13,7 +13,6 @@
     "dev:watch": "concurrently npm:dev npm:test:watch",
     "build": "tsc",
     "build:dev": "npm run postbuild && rm -rf dist && tsc",
-    "postbuild": "npm run lint",
     "prepare": "husky install",
     "test": "jest -i --runInBand --verbose",
     "test:coverage": "jest -i --runInBand --coverage --verbose",
