@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "A backend service for monitoring blockchain transactions.",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
     "format": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
-    "lint": "eslint --ext .ts src/",
-    "lint:fix": "eslint . --ext .ts --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "generate:docs": "typedoc",
     "dev": "nodemon",
     "dev:watch": "concurrently npm:dev npm:test:watch",
@@ -38,6 +39,7 @@
   "homepage": "https://github.com/peterlogo/block-monitor-server#readme",
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@types/ajv": "^1.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",
     "concurrently": "^8.2.2",
@@ -56,5 +58,10 @@
     "typedoc": "^0.25.13",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.6.0"
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "env-schema": "^5.2.1",
+    "fastify": "^4.26.2"
   }
 }
