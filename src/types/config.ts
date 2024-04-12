@@ -8,3 +8,19 @@ export interface Config {
   NODE_ENV: NodeEnv;
   ROUTES_PREFIX: string;
 }
+
+/**
+ * Synchronous callback function type definition.
+ */
+type SyncCallBackFunction = (...args: any[]) => void;
+
+/**
+ * Asynchronous callback function type definition.
+ */
+type AsyncCallBackFunction = (...args: any[]) => Promise<void>;
+
+/**
+ * Callback function type definition.
+ * It can be either synchronous or asynchronous.
+ */
+export type CallBackFunction = SyncCallBackFunction | AsyncCallBackFunction;

@@ -1,6 +1,8 @@
 import Fastify from 'fastify';
 import { config } from './config';
 import { pinoLogLevel, pinoTransport } from './services';
+import { HOST_IP } from './utils';
+import { initializeMongoDB } from './db';
 
 const server = Fastify({
   logger: {
@@ -13,9 +15,13 @@ server.get('/', async (_, reply) => {
   reply.code(200).send({ message: 'Hello, world!' });
 });
 
-server.listen({ port: config.PORT, host: '0.0.0.0' }, (err, __) => {
-  if (err) {
-    server.log.error(err);
-    process.exit(1);
-  }
+// Initialize MongoDB connection before starting the server.
+// This is to ensure that the server does not start if the MongoDB connection fails.
+Promise.all([initializeMongoDB()]).then(() => {
+  server.listen({ port: config.PORT, host: HOST_IP }, (err, __) => {
+    if (err) {
+      server.log.error(err);
+      process.exit(1);
+    }
+  });
 });
