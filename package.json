@@ -19,6 +19,12 @@
     "test:coverage": "jest -i --runInBand --coverage --verbose",
     "test:watch": "jest -i --runInBand --watchAll --verbose"
   },
+  "lint-staged": {
+    "**/*.ts": [
+      "yarn format",
+      "yarn lint"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/peterlogo/block-monitor-server.git"
