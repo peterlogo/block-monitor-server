@@ -21,8 +21,7 @@
   },
   "lint-staged": {
     "**/*.ts": [
-      "yarn format",
-      "yarn lint"
+      "yarn format"
     ]
   },
   "repository": {

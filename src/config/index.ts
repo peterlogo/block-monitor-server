@@ -9,6 +9,5 @@ import type { Config } from '../types/config';
  */
 export const config: Config = envSchema({
   schema,
-  data: process.env,
   dotenv: true
 });
