@@ -11,8 +11,9 @@ export const schema: JSONSchemaType<Config> = {
   properties: {
     MONGO_URI: { type: 'string' },
     PORT: { type: 'number' },
-    NODE_ENV: { type: 'string', enum: ['development', 'production'] }
+    NODE_ENV: { type: 'string', enum: ['development', 'production'] },
+    ROUTES_PREFIX: { type: 'string' }
   },
-  required: ['MONGO_URI', 'PORT', 'NODE_ENV'],
+  required: ['MONGO_URI', 'PORT', 'NODE_ENV', 'ROUTES_PREFIX'],
   additionalProperties: false
 };
