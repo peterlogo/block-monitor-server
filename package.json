@@ -2,9 +2,22 @@
   "name": "block-monitor-server",
   "version": "1.0.0",
   "description": "A backend service for monitoring blockchain transactions.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index.js",
+    "format": "prettier --config .prettierrc \"./src/**/*.ts\" --write",
+    "lint": "eslint --ext .ts src/",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "generate:docs": "typedoc",
+    "dev": "nodemon",
+    "dev:watch": "concurrently npm:dev npm:test:watch",
+    "build": "tsc",
+    "build:dev": "npm run postbuild && rm -rf dist && tsc",
+    "postbuild": "npm run lint",
+    "prepare": "husky install",
+    "test": "jest -i --runInBand --verbose",
+    "test:coverage": "jest -i --runInBand --coverage --verbose",
+    "test:watch": "jest -i --runInBand --watchAll --verbose"
   },
   "repository": {
     "type": "git",
