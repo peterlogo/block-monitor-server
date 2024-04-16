@@ -7,6 +7,7 @@ export interface Config {
   PORT: number;
   NODE_ENV: NodeEnv;
   ROUTES_PREFIX: string;
+  JWT_SECRET: string;
 }
 
 /**

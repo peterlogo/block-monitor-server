@@ -1,7 +1,14 @@
 import Fastify from 'fastify';
+import fastifyCookie from '@fastify/cookie';
+import fastifyJwt from '@fastify/jwt';
 import { config } from './config';
 import { pinoLogLevel, pinoTransport } from './services';
-import { HOST_IP } from './utils';
+import {
+  HOST_IP,
+  JWT_COOKIE_NAME,
+  JWT_EXPIRATION_TIME,
+  cookieOptions
+} from './utils';
 import { initializeMongoDB } from './db';
 
 const server = Fastify({
@@ -9,6 +16,21 @@ const server = Fastify({
     level: pinoLogLevel,
     stream: pinoTransport
   }
+});
+
+server.register(fastifyJwt, {
+  secret: config.JWT_SECRET,
+  cookie: {
+    cookieName: JWT_COOKIE_NAME,
+    signed: config.NODE_ENV !== 'development'
+  },
+  sign: {
+    expiresIn: JWT_EXPIRATION_TIME
+  }
+});
+
+server.register(fastifyCookie, {
+  parseOptions: cookieOptions
 });
 
 server.get('/', async (_, reply) => {
