@@ -2,11 +2,12 @@ import type { FastifyInstance } from 'fastify';
 import { authRoutes } from './authRoutes';
 import { userRoutes } from './userRoutes';
 import { config } from '../config';
+import { webhookRoutes } from './webhookRoutes';
 
 /**
  * Array of all routes in the application.
  */
-const routes = [authRoutes, userRoutes];
+const routes = [authRoutes, userRoutes, webhookRoutes];
 
 /**
  * Registers all routes in the application.
