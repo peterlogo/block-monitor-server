@@ -30,7 +30,12 @@ export interface IUserService {
 
 /** User Controller methods type definition. */
 export interface IUserController {
-  getUserById(request: FastifyRequest, reply: FastifyReply): Promise<void>;
+  getUser(request: FastifyRequest, reply: FastifyReply): Promise<void>;
   updateUser(request: FastifyRequest, reply: FastifyReply): Promise<void>;
   deleteUser(request: FastifyRequest, reply: FastifyReply): Promise<void>;
 }
+
+/** Update user body type definition. */
+export type UpdateUserBody = Partial<
+  Pick<User, 'firstName' | 'lastName' | 'email' | 'password'>
+>;

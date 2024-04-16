@@ -36,7 +36,7 @@ export class AuthController implements IAuthController {
         password: hashPassword
       });
 
-      const token = await reply.jwtSign({ user: user._id });
+      const token = await reply.jwtSign({ id: user._id });
       reply.setCookie(JWT_COOKIE_NAME, token);
       reply.code(201).send({ message: 'User registered successfully' });
     } catch (error) {
@@ -66,7 +66,7 @@ export class AuthController implements IAuthController {
         return;
       }
 
-      const token = await reply.jwtSign({ user: user._id });
+      const token = await reply.jwtSign({ id: user._id });
       reply.setCookie(JWT_COOKIE_NAME, token);
       reply.code(200).send({ message: 'Login successful' });
     } catch (error) {
