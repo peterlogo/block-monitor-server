@@ -14,15 +14,13 @@ const baseOptions: RedisOptions = {
 };
 
 /** Redis connection options */
-const redisOptions: RedisOptions =
-  config.NODE_ENV !== 'development'
-    ? {
-        ...baseOptions,
-        tls: {},
-        username: redisUrl.username,
-        password: redisUrl.password
-      }
-    : { ...baseOptions, password: redisUrl.password };
+const redisOptions: RedisOptions = {
+  ...baseOptions,
+  password: redisUrl.password,
+  ...(config.NODE_ENV !== 'development'
+    ? { tls: {}, username: redisUrl.username }
+    : {})
+};
 
 /** Redis client instance */
 const redis = new Redis(redisOptions);
