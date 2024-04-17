@@ -16,12 +16,13 @@ const baseOptions: RedisOptions = {
 /** Redis connection options */
 const redisOptions: RedisOptions =
   config.NODE_ENV !== 'development'
-    ? { ...baseOptions, tls: {} }
-    : {
+    ? {
         ...baseOptions,
-        password: redisUrl.password,
-        username: redisUrl.username
-      };
+        tls: {},
+        username: redisUrl.username,
+        password: redisUrl.password
+      }
+    : { ...baseOptions, password: redisUrl.password };
 
 /** Redis client instance */
 const redis = new Redis(redisOptions);
