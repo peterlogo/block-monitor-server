@@ -13,8 +13,20 @@ export const schema: JSONSchemaType<Config> = {
     PORT: { type: 'number' },
     NODE_ENV: { type: 'string', enum: ['development', 'production'] },
     ROUTES_PREFIX: { type: 'string' },
-    JWT_SECRET: { type: 'string' }
+    JWT_SECRET: { type: 'string' },
+    SOLANA_RPC_URL: { type: 'string' },
+    SOLANA_WS_URL: { type: 'string' },
+    REDIS_URI: { type: 'string' }
   },
-  required: ['MONGO_URI', 'PORT', 'NODE_ENV', 'ROUTES_PREFIX', 'JWT_SECRET'],
+  required: [
+    'MONGO_URI',
+    'PORT',
+    'NODE_ENV',
+    'ROUTES_PREFIX',
+    'JWT_SECRET',
+    'SOLANA_RPC_URL',
+    'SOLANA_WS_URL',
+    'REDIS_URI'
+  ],
   additionalProperties: false
 };

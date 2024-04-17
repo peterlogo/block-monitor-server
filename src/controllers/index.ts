@@ -1,5 +1,5 @@
 import { UserDao, WebhookDao } from '../dao';
-import { UserService, WebhookService } from '../services';
+import { UserService, WebhookService, solanaService } from '../services';
 import { UserModel, WebhookModel } from '../models';
 
 import { UserController } from './userController';
@@ -22,7 +22,10 @@ function createControllers() {
   // Create instances of all controllers
   const userController = new UserController({ userService });
   const authController = new AuthController({ userService });
-  const webhookController = new WebhookController({ webhookService });
+  const webhookController = new WebhookController({
+    webhookService,
+    solanaService
+  });
 
   return { userController, authController, webhookController };
 }

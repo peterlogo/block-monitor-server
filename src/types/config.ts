@@ -8,6 +8,9 @@ export interface Config {
   NODE_ENV: NodeEnv;
   ROUTES_PREFIX: string;
   JWT_SECRET: string;
+  SOLANA_RPC_URL: string;
+  SOLANA_WS_URL: string;
+  REDIS_URI: string;
 }
 
 /**

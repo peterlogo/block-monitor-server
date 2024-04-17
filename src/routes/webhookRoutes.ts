@@ -1,6 +1,10 @@
 import type { FastifyInstance } from 'fastify';
 import { webhookController } from '../controllers';
-import { CreateWebhookBodySchema, WebhookParamsSchema } from '../schemas';
+import {
+  CreateWebhookBodySchema,
+  UpdateWebhookBodySchema,
+  WebhookParamsSchema
+} from '../schemas';
 
 export async function webhookRoutes(fastify: FastifyInstance) {
   // test route as a webhook url
@@ -38,8 +42,7 @@ export async function webhookRoutes(fastify: FastifyInstance) {
   fastify.get(
     '/webhooks',
     {
-      onRequest: (request, _) => request.jwtVerify(),
-      schema: { params: WebhookParamsSchema }
+      onRequest: (request, _) => request.jwtVerify()
     },
     (request, reply) => webhookController.getWebhooks(request, reply)
   );
@@ -47,7 +50,7 @@ export async function webhookRoutes(fastify: FastifyInstance) {
     '/webhooks/:id',
     {
       onRequest: (request, _) => request.jwtVerify(),
-      schema: { params: WebhookParamsSchema }
+      schema: { params: WebhookParamsSchema, body: UpdateWebhookBodySchema }
     },
     (request, reply) => webhookController.updateWebhook(request, reply)
   );

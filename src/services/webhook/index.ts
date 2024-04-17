@@ -12,7 +12,8 @@ export class WebhookService implements IWebhookService {
   }
 
   async create(webhook: IWebhook): Promise<IWebhook> {
-    return await this.webhookDao.create(webhook);
+    const newWebhook = await this.webhookDao.create(webhook);
+    return newWebhook;
   }
 
   async getById(id: string): Promise<IWebhook | null> {

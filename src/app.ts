@@ -1,8 +1,8 @@
 import Fastify from 'fastify';
 import { config } from './config';
-import { pinoLogLevel, pinoTransport } from './services';
+import { pinoLogLevel, pinoTransport, solanaService } from './services';
 import { HOST_IP } from './utils';
-import { initializeMongoDB } from './db';
+import { initializeMongoDB, initializeRedisListeners } from './db';
 import { registerRoutes } from './routes';
 import { registerPlugins } from './plugin';
 
@@ -16,7 +16,9 @@ const server = Fastify({
 // Initialize server
 async function initializeServer() {
   try {
+    initializeRedisListeners();
     await initializeMongoDB();
+    await solanaService.monitorAddresses();
     registerPlugins(server);
     registerRoutes(server);
     await server.listen({ port: config.PORT || 3001, host: HOST_IP });

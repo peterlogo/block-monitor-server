@@ -20,3 +20,15 @@ export const WebhookParamsSchema: JSONSchemaType<{ id: string }> = {
   },
   additionalProperties: false
 };
+
+export const UpdateWebhookBodySchema: JSONSchemaType<
+  Partial<CreateWebhookBody>
+> = {
+  type: 'object',
+  properties: {
+    url: { type: 'string', format: 'uri', nullable: true },
+    address: { type: 'string', nullable: true },
+    token: { type: 'string', enum: Object.values(Token), nullable: true }
+  },
+  additionalProperties: false
+};

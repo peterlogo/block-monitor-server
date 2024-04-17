@@ -12,3 +12,9 @@ export const JWT_COOKIE_NAME = 'access_token';
 
 // JWT expiration time.
 export const JWT_EXPIRATION_TIME = '1h';
+
+// Solana address key.
+export const SOLANA_ADDRESS_KEY = 'solana:address';
+
+// Solana signature prefix.
+export const SOLANA_SIGNATURE_PREFIX = 'sol:signatures:';

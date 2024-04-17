@@ -5,6 +5,7 @@ import type {
   IWebhookController,
   IWebhookService
 } from '../types/webhook';
+import { ISolanaService } from '../types/solana';
 
 /**
  * Webhook Controller.
@@ -15,9 +16,17 @@ import type {
  */
 export class WebhookController implements IWebhookController {
   private webhookService: IWebhookService;
+  private solanaService: ISolanaService;
 
-  constructor({ webhookService }: { webhookService: IWebhookService }) {
+  constructor({
+    webhookService,
+    solanaService
+  }: {
+    webhookService: IWebhookService;
+    solanaService: ISolanaService;
+  }) {
     this.webhookService = webhookService;
+    this.solanaService = solanaService;
   }
 
   /**
@@ -35,6 +44,16 @@ export class WebhookController implements IWebhookController {
         userId: id,
         ...body
       };
+
+      if (body.token === 'solana') {
+        const isValid = this.solanaService.isValidAddress(body.address);
+        if (!isValid) {
+          reply.code(400).send({ message: 'Invalid address' });
+          return;
+        }
+
+        await this.solanaService.addAddressToSubscription(body.address);
+      }
 
       const webhook = await this.webhookService.create(newWebhook);
       reply.code(201).send({ data: webhook });
@@ -129,6 +148,7 @@ export class WebhookController implements IWebhookController {
   async testWebhook(request: FastifyRequest, reply: FastifyReply) {
     try {
       const body = request.body as any;
+      request.log.info({ body }, 'Webhook test received');
       reply.code(200).send({ data: body });
     } catch (error) {
       reply.code(500).send({ message: 'Internal Server Error' });
